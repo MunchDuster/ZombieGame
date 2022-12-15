@@ -28,6 +28,8 @@ public class Gun : MonoBehaviour, IWeapon
 	public Animator animator;
 	public PlayerMoney playerMoney;
 
+	public Transform pointToCenterOfScreenTransform;
+
 
 	public void TakeClips(int clips) { this.clips += clips; }
 
@@ -118,7 +120,7 @@ public class Gun : MonoBehaviour, IWeapon
 		muzzleFlashFX.Play();
 
 		//Fire the bullet
-		if (Physics.Raycast(shootPoint.position, shootPoint.forward, out RaycastHit hit, 100, shootLayerMask, QueryTriggerInteraction.Ignore))
+		if (hit.point != null)
 		{
 			Health health = Health.FindHealth(hit.transform);
 			if (health != null)
@@ -150,8 +152,20 @@ public class Gun : MonoBehaviour, IWeapon
 		}
 		StartCoroutine(Recoil());
 	}
+
+	RaycastHit hit;
 	void Update()
 	{
+		if (Physics.Raycast(shootPoint.position, shootPoint.forward, out RaycastHit rayHit, 100, shootLayerMask, QueryTriggerInteraction.Ignore))
+		{
+			hit = rayHit;
+			UpdateGunAngle();
+		}
+		else
+		{
+			hit = new RaycastHit();
+		}
+
 		bool firePressed = Input.GetKey(KeyCode.Mouse0);
 		if (firePressed)
 		{
@@ -172,6 +186,13 @@ public class Gun : MonoBehaviour, IWeapon
 		{
 			Reload();
 		}
+	}
+	public LayerMask pointToScreenMask;
+	void UpdateGunAngle()
+	{
+
+		if (!isReloading && !isRecoiling && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit screenHit, pointToScreenMask))
+			pointToCenterOfScreenTransform.LookAt(screenHit.point);
 	}
 	private IEnumerator Recoil()
 	{

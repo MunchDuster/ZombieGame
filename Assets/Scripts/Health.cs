@@ -13,7 +13,6 @@ public class Health : MonoBehaviour
 	public Collider head;
 	public UnityEvent OnDeath;
 	public UnityEvent OnHit;
-	public TextMeshProUGUI text;
 
 	public int healthRegen = 0;
 
@@ -30,7 +29,6 @@ public class Health : MonoBehaviour
 	void Start()
 	{
 		health = maxHealth;
-		if (text != null) text.text = health.ToString();
 		StartCoroutine(Regen());
 	}
 
@@ -40,7 +38,6 @@ public class Health : MonoBehaviour
 		{
 			yield return new WaitForSeconds(1);
 			health = Mathf.Clamp(healthRegen + health, 0, maxHealth);
-			if (text != null) text.text = health.ToString("000");
 
 		}
 	}
@@ -70,9 +67,6 @@ public class Health : MonoBehaviour
 		{
 			if (OnHit != null) OnHit.Invoke();
 		}
-
-
-		if (text != null) text.text = health.ToString("000");
 
 		return hitInfo;
 	}

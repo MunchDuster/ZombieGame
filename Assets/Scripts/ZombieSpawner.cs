@@ -113,7 +113,6 @@ public class ZombieSpawner : MonoBehaviour
 		else
 		{
 			float ranNum = Random.Range(0f, 1f);
-			Debug.Log(ranNum);
 			for (int i = 0; i < zombiePrefabs.Length; i++)
 			{
 				if (wave < zombiePrefabs[i].minWave) break;

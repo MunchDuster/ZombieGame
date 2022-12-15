@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class Aimer : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class Aimer : MonoBehaviour
 
 	public Transform output;
 
+	bool isAiming;
+	public UnityEvent<bool> OnAim;
 
 	// Update is called once per frame
 	void LateUpdate()
@@ -28,9 +32,14 @@ public class Aimer : MonoBehaviour
 		if (aimPressed && gun.CanBeFiredIgnoreIsRecoiling())
 		{
 			//Position
-			Debug.Log("Is aiming");
 			Vector3 offset = gun.GetAimOffset();
 			positionTarget = targetAimingPosition.position + offset;
+
+			if (!isAiming)
+			{
+				OnAim.Invoke(true);
+				isAiming = true;
+			}
 		}
 
 		//Normal
@@ -38,11 +47,26 @@ public class Aimer : MonoBehaviour
 		{
 			//Position
 			positionTarget = targetNormalPosition.position;
+
+			if (isAiming)
+			{
+				OnAim.Invoke(false);
+				isAiming = false;
+			}
 		}
 
 		//Lerp
 		output.position = Vector3.Lerp(output.position, positionTarget, Time.deltaTime * positionSpeed);
 		output.rotation = Quaternion.Lerp(output.rotation, rotationTarget, Time.deltaTime * rotationSpeed);
+	}
+
+	void OnDisable()
+	{
+		if (isAiming)
+		{
+			OnAim.Invoke(false);
+			isAiming = false;
+		}
 	}
 
 
