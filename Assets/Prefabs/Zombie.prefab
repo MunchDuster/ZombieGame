@@ -412,6 +412,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8181949986274779099, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0884
+      objectReference: {fileID: 0}
+    - target: {fileID: -8181949986274779099, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0884
+      objectReference: {fileID: 0}
+    - target: {fileID: -8181949986274779099, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0883998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8181949986274779099, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.71552175
       objectReference: {fileID: 0}
@@ -825,6 +840,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2017885835083925265, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.1916136e-13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017885835083925265, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.20856096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017885835083925265, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.618657e-10
+      objectReference: {fileID: 0}
     - target: {fileID: 2367489681066790267, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -922,6 +952,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3722503846514465673, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0884
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722503846514465673, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0883999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722503846514465673, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0883999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722503846514465673, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7169646
       objectReference: {fileID: 0}
@@ -983,6 +1028,11 @@ PrefabInstance:
     - target: {fileID: 4422936236625503000, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b2c188cd2ab381408f23527712a0d6b, type: 2}
+    - target: {fileID: 4422936236625503000, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 1b487c62e3175a94d9764d676f683278, type: 2}
     - target: {fileID: 4632618279235390012, guid: d6cd76f52bb0a9544bd4d6e0346b517b,
@@ -1234,7 +1284,9 @@ MonoBehaviour:
           m_StringArgument: Flinch
           m_BoolArgument: 0
         m_CallState: 2
-  text: {fileID: 0}
+  OnChange:
+    m_PersistentCalls:
+      m_Calls: []
   healthRegen: 0
 --- !u!114 &274782186
 MonoBehaviour:
@@ -1248,37 +1300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76515a980166a084795423c76b9a23cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTurnSpeed: 180
-  turnSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  rotateSpeed: 180
   agent: {fileID: 274782184}
   closestPlayerCheckTime: 2.5
-  controller: {fileID: 0}
-  stopWhenCanSeeEnemy: 0
-  maxDistanceCanSeeEnemy: 0
 --- !u!114 &6826936548048140971
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
 	public Collider head;
 	public UnityEvent OnDeath;
 	public UnityEvent OnHit;
+	public delegate void OnEvent();
+	public OnEvent OnChange;
 
 	public int healthRegen = 0;
 
@@ -37,8 +39,8 @@ public class Health : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(1);
+			if (health < maxHealth && OnChange != null) OnChange.Invoke();
 			health = Mathf.Clamp(healthRegen + health, 0, maxHealth);
-
 		}
 	}
 
@@ -48,9 +50,8 @@ public class Health : MonoBehaviour
 	}
 
 	//Damage from not bullet, but stil from Character
-	public HitInfo TakeDamage(Vector3 point, Collider col, IWeapon weapon, Transform damager, float damage)
+	public HitInfo TakeDamage(Vector3 point, Collider col, Weapon weapon, Transform damager, float damage)
 	{
-
 		if (!canTakeDamage || isDead) return null;
 
 		if (head != null && col == head) damage *= 2f;
@@ -65,6 +66,7 @@ public class Health : MonoBehaviour
 		}
 		else
 		{
+			if (OnChange != null) OnChange.Invoke();
 			if (OnHit != null) OnHit.Invoke();
 		}
 

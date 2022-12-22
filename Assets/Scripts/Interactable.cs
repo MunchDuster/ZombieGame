@@ -19,7 +19,7 @@ public abstract class Interactable : MonoBehaviour
 	}
 
 	//On click
-	public abstract InteractionInfo Interact(Transform player, bool active);
+	public abstract InteractionInfo Interact(Player player, bool active);
 
 	//Shows hover info
 	public void StartHover(HoverInfo hoverInfo)

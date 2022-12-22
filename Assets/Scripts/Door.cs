@@ -34,7 +34,7 @@ public class Door : Interactable
 
 
 	//Attempt to toggle open/close if not locked
-	public override InteractionInfo Interact(Transform player, bool active)
+	public override InteractionInfo Interact(Player player, bool active)
 	{
 		if (!unlocked)
 		{

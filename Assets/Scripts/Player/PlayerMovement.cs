@@ -7,14 +7,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+	#region variables
 	//Refs
 	[HideInInspector] public Rigidbody rb;
 	public Transform joint;
 	public Camera playerCamera;
 
 	//Events
-	public UnityEvent OnMoveStart;
-	public UnityEvent OnMoveStop;
+	public UnityEvent<float> OnMoveUpdate;
 
 	//Controls
 	public bool cameraCanMove = true;
@@ -61,17 +61,20 @@ public class PlayerMovement : MonoBehaviour
 	private float yaw = 0.0f;
 	private float pitch = 0.0f;
 
-	//Movement
+	//Speeds
 	public float walkSpeed = 5f;
+	public float crouchedSpeed = 5f;
+	public float sprintSpeed = 7f;
 	public float maxVelocityChange = 10f;
 
 	//Sprint
-	public bool unlimitedSprint = true;
-	public float sprintSpeed = 7f;
 	public float sprintDuration = 5f;
+	public bool unlimitedSprint = true;
 	public float sprintCooldown = .5f;
 	public float sprintFOV = 80f;
 	public float sprintFOVStepTime = 10f;
+
+	public Animator animator;
 
 	private float sprintRemaining;
 	private bool isSprintCooldown = false;
@@ -93,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 	public float bobSpeed = 10f;
 	public Vector3 bobAmount = new Vector3(.15f, .05f, 0f);
 	private float timer = 0;
+	#endregion
 
 	private void Awake()
 	{
@@ -121,78 +125,42 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.P)) mouseSensitivity *= 0.8f;
 
 		CheckGround();
-
 		UpdateInputs();
 
-		if (cameraCanMove)
-		{
-			UpdateCamera();
-		}
-		if (enableSprint)
-		{
-			UpdateSprint();
-		}
-
-		if (enableJump && jumpPressed && isGrounded)
-		{
-			Jump();
-		}
-		if (enableCrouch)
-		{
-			CheckCrouch();
-		}
-		if (enableHeadBob)
-		{
-			HeadBob();
-		}
+		if (cameraCanMove) UpdateCamera();
+		if (enableSprint) UpdateSprint();
+		if (enableJump && jumpPressed && isGrounded) Jump();
+		if (enableCrouch) CheckCrouch();
+		if (enableHeadBob) HeadBob();
 	}
 	private void UpdateInputs()
 	{
-		if (playerCanMove)
-		{
-			sprintPressed = Input.GetKeyDown(sprintKey);
-			jumpPressed = Input.GetKeyDown(jumpKey);
-			crouchPressed = Input.GetKeyDown(crouchKey);
+		sprintPressed = Input.GetKeyDown(sprintKey);
+		jumpPressed = Input.GetKeyDown(jumpKey);
+		crouchPressed = Input.GetKeyDown(crouchKey);
 
-			moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		moveInput = new Vector3(
+			Input.GetAxis("Horizontal"),
+			0,
+			Input.GetAxis("Vertical")
+		).normalized;
 
-		}
-		else
-		{
-			sprintPressed = false;
-			jumpPressed = false;
-			crouchPressed = false;
+		lookInput = new Vector3(
+			Input.GetAxis("Mouse X"),
+			0,
+			Input.GetAxis("Mouse Y")
+		);
 
-			moveInput = Vector3.zero;
-		}
+		if (!playerCanMove) return;
+		OnMoveUpdate.Invoke(moveInput.magnitude);
+		animator.SetFloat("Walk", moveInput.magnitude);
 
-		if (cameraCanMove)
-		{
-			lookInput = new Vector3(Input.GetAxis("Mouse X"), 0, Input.GetAxis("Mouse Y"));
-		}
-		else
-		{
-			lookInput = Vector3.zero;
-		}
+
 	}
 	private void CheckCrouch()
 	{
-		if (crouchPressed)
-		{
-			if (isCrouched)
-			{
-				isCrouched = false;
-				ToggleCrouch();
-			}
-		}
-		else
-		{
-			if (!isCrouched)
-			{
-				isCrouched = true;
-				ToggleCrouch();
-			}
-		}
+		if (isCrouched && !crouchPressed) ToggleCrouch(false);
+		else if (!isCrouched && crouchPressed) ToggleCrouch(true);
 	}
 	private void UpdateCamera()
 	{
@@ -224,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
 		else
 		{
 			// Regain sprint while not sprinting
-			sprintRemaining = Mathf.Clamp(sprintRemaining += 1 * Time.deltaTime, 0, sprintDuration);
+			sprintRemaining = Mathf.Clamp(sprintRemaining + Time.deltaTime, 0, sprintDuration);
 		}
 
 		// Handles sprint cooldown 
@@ -244,35 +212,31 @@ public class PlayerMovement : MonoBehaviour
 	}
 	private void HeadBob()
 	{
-		if (isWalking)
+		if (!isWalking)
 		{
-			// Calculates HeadBob speed during sprint
-			if (isSprinting)
-			{
-				timer += Time.deltaTime * (bobSpeed + sprintSpeed);
-			}
-			// Calculates HeadBob speed during crouched movement
-			else if (isCrouched)
-			{
-				timer += Time.deltaTime * (bobSpeed * speedReduction);
-			}
-			// Calculates HeadBob speed during walking
-			else
-			{
-				timer += Time.deltaTime * bobSpeed;
-			}
-			// Applies HeadBob movement
-			joint.localPosition = new Vector3(jointOriginalPos.x + Mathf.Sin(timer) * bobAmount.x, jointOriginalPos.y + Mathf.Sin(timer) * bobAmount.y, jointOriginalPos.z + Mathf.Sin(timer) * bobAmount.z);
-		}
-		else
-		{
-			// Resets when play stops moving
+			// Resets when stops moving
 			timer = 0;
-			joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
+			joint.localPosition = new Vector3(
+				Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed),
+				Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed),
+				Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed)
+			);
+			return;
 		}
+
+		float bobSpeedMultiplier = isSprinting ? (bobSpeed + sprintSpeed) : (isCrouched ? (bobSpeed * speedReduction) : (bobSpeed));
+		timer += Time.deltaTime * bobSpeedMultiplier;
+
+		// Applies HeadBob movement
+		joint.localPosition = new Vector3(
+			jointOriginalPos.x + Mathf.Sin(timer) * bobAmount.x,
+			jointOriginalPos.y + Mathf.Sin(timer) * bobAmount.y,
+			jointOriginalPos.z + Mathf.Sin(timer) * bobAmount.z
+		);
 	}
-	private void ToggleCrouch()
+	private void ToggleCrouch(bool isCrouched)
 	{
+		this.isCrouched = isCrouched;
 		if (isCrouched)
 		{
 			transform.localScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
@@ -290,38 +254,20 @@ public class PlayerMovement : MonoBehaviour
 		awaitingJump = true;
 
 		// Uncrouch for a jump
-		if (isCrouched)
-		{
-			isCrouched = false;
-			ToggleCrouch();
-		}
+		if (isCrouched) ToggleCrouch(false);
 	}
 
 	void FixedUpdate()
 	{
-		bool wasWalking = isWalking;
 		bool wantsToMove = moveInput.x != 0 || moveInput.z != 0;
 		bool canSprint = sprintRemaining > 0f && !isSprintCooldown;
 
 		isWalking = wantsToMove && playerCanMove && isGrounded;
 		isSprinting = isWalking && enableSprint && sprintPressed && canSprint;
 
-		if (isWalking && !wasWalking)
-		{
-			OnMoveStart.Invoke();
-		}
-		else if (!isWalking && wasWalking)
-		{
-			OnMoveStop.Invoke();
-		}
-		if (isSprinting)
-		{
-			ApplyMoveForce(sprintSpeed);
-		}
-		else
-		{
-			ApplyMoveForce(walkSpeed);
-		}
+		if (isSprinting) ApplyMoveForce(sprintSpeed);
+		else if (isCrouched) ApplyMoveForce(crouchedSpeed);
+		else ApplyMoveForce(walkSpeed);
 	}
 	private void ApplyMoveForce(float speed)
 	{

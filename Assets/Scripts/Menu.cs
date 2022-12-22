@@ -3,20 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+	public string loadMap;
+	public string loadScene;
+
+	public static Menu instance;
+
+	void Awake()
+	{
+		instance = this;
+		SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
+	}
+
 	public void Quit()
 	{
 		Application.Quit();
 	}
 
-	public void LoadScene(string name)
+	public void LoadScene(bool includeAdditive = false)
 	{
 		Time.timeScale = 1;
-		SceneManager.LoadScene(name);
-	}
-
-	void Update()
-	{
-		if (Input.GetKey(KeyCode.Q)) Quit();
-		if (Input.GetKey(KeyCode.R)) LoadScene(SceneManager.GetActiveScene().name);
+		LoadingMenu.instance.LoadScenes(loadMap);
 	}
 }

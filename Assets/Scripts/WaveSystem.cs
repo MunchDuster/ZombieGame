@@ -6,6 +6,7 @@ using TMPro;
 
 public class WaveSystem : MonoBehaviour
 {
+	public static WaveSystem instance;
 	public float startZombieHealth = 40;
 	public float zombieHealthIncrease = 20;
 	public float startZombieSpeed = 1;
@@ -17,32 +18,33 @@ public class WaveSystem : MonoBehaviour
 	public int zombiesIncrease = 2;
 	public float spawnGapDecrease = 0.2f;
 	public float minSpawnGap = 0.2f;
-	public TextMeshProUGUI text;
 
-	public UnityEvent OnWaveIncreased;
+	public UnityEvent<int> OnWaveIncreased;
 
 	public float waveGapTime = 3;
 	public ZombieSpawner spawner;
 	public int waveNo = 0;
+	public bool startSpawningAtStart;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		instance = this;
 		spawner.OnAllZombiesDead.AddListener(() => { StartCoroutine(OnWaveCompleted()); });
-
+		if (startSpawningAtStart) StartNextWave();
 	}
 
 	IEnumerator OnWaveCompleted()
 	{
 		yield return new WaitForSeconds(waveGapTime);
 		waveNo++;
-		OnWaveIncreased.Invoke();
+		OnWaveIncreased.Invoke(waveNo);
 		StartNextWave();
 	}
 
 	public void StartNextWave()
 	{
-		text.text = (waveNo + 1).ToString();
+
 		spawner.zombieHealth = startZombieHealth + waveNo * zombieHealthIncrease;
 		spawner.zombieSpeed = startZombieSpeed + waveNo * zombieSpeedIncrease;
 		spawner.minSpawnGap = Mathf.Max(spawner.minSpawnGap - spawnGapDecrease, minSpawnGap);

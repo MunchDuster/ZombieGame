@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
+[RequireComponent(typeof(Player))]
 public class PlayerSense : MonoBehaviour
 {
 	public float raycastDist = 5f;
@@ -14,6 +15,12 @@ public class PlayerSense : MonoBehaviour
 	public HoverInfo hoverInfo;
 	private bool isOn = true;
 	public TextMeshProUGUI text;
+
+	Player player;
+	void Start()
+	{
+		player = GetComponent<Player>();
+	}
 
 	//Update is called every frame.
 	private void Update()
@@ -38,7 +45,7 @@ public class PlayerSense : MonoBehaviour
 	private void UpdateHoverInfo()
 	{
 		if (curHover != null)
-			text.text = curHover.Interact(transform, Input.GetKey(KeyCode.E)).info;
+			text.text = curHover.Interact(player, Input.GetKey(KeyCode.E)).info;
 		else
 			text.text = "";
 	}
