@@ -47,7 +47,7 @@ public class GrenadeThrown : MonoBehaviour
 				HitInfo hitInfo = health.TakeDamage(Vector3.zero, c, grenadeBase, character, damageDealt);
 				if (hitInfo.killedEnemy)
 				{
-
+					grenadeBase.playerMoney.AddMoney(health.value);
 				}
 			}
 		}

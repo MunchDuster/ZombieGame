@@ -57,6 +57,12 @@ public class ZombieSpawner : MonoBehaviour
 		zombiesAlive--;
 	}
 
+	public void StopSpawningZombies()
+	{
+		StopCoroutine(Round());
+
+	}
+
 	IEnumerator Round()
 	{
 		while (spawnedInRound < spawnTarget)

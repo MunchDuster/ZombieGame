@@ -1,16 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+
 
 public class WeaponManager : MonoBehaviour
 {
-	public TextMeshProUGUI clipAmmoText;
-	public TextMeshProUGUI reserveAmmoText;
+	public TextMeshProUGUI weaponNameText;
+	public TextMeshProUGUI ammoText;
+	public RawImage weaponIconImage;
 	public Transform player;
 	public Transform hipFirePoint;
 	public Transform aimFirePoint;
 	public PlayerMoney playerMoney;
 	public Transform recoilRotation;
+	public Transform normalItemPos;
 
 	public List<Weapon> weapons = new List<Weapon>();
 
@@ -22,6 +26,9 @@ public class WeaponManager : MonoBehaviour
 		if (!weapons[newIndex].canUse) return;
 		weapons[index].SetActive(false);
 		weapons[newIndex].SetActive(true);
+
+		weaponNameText.text = weapons[newIndex].weaponName;
+		weaponIconImage.texture = weapons[newIndex].icon;
 		index = newIndex;
 	}
 
@@ -42,22 +49,22 @@ public class WeaponManager : MonoBehaviour
 
 		GameObject instantiation = Instantiate(prefab, transform);
 		Weapon weapon = instantiation.GetComponentInChildren<Weapon>();
-		weapons.Add(weapon);
+		weapon.ammoText = ammoText;
+		weapon.player = player;
+		weapon.playerMoney = playerMoney;
+		weapon.normalItemPos = normalItemPos;
 
 		//Setup specifically for gun 
 		Gun gun = weapon as Gun;
 		if (gun != null)
 		{
-			gun.clipAmmoText = clipAmmoText;
-			gun.reserveAmmoText = reserveAmmoText;
-			gun.character = player;
 			gun.playerMoney = playerMoney;
 			gun.recoiler.RecoilRotationTranform = recoilRotation;
 			gun.aimer.targetNormalPosition = hipFirePoint;
 			gun.aimer.targetAimingPosition = aimFirePoint;
 		}
 
-
+		weapons.Add(weapon);
 
 		UpdateIndex(index);
 	}

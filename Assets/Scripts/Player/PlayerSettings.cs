@@ -7,17 +7,19 @@ public class PlayerSettings
 	public Player inGamePlayer;
 	public GameObject primaryWeapon;
 	public GameObject secondaryWeapon;
+	public GameObject grenades;
 
 	public PlayerSettings(PlayerClass playerClass, string playerName)
 	{
 		this.playerClass = playerClass;
 		this.playerName = playerName;
 	}
-	public PlayerSettings(PlayerClass playerClass, string playerName, GameObject primaryWeaponPrefab, GameObject secondaryWeaponPrefab)
+	public PlayerSettings(PlayerClass playerClass, string playerName, GameObject primaryWeaponPrefab, GameObject secondaryWeaponPrefab, GameObject grenades)
 	{
 		this.playerClass = playerClass;
 		this.playerName = playerName;
 		this.primaryWeapon = primaryWeaponPrefab;
 		this.secondaryWeapon = secondaryWeaponPrefab;
+		this.grenades = grenades;
 	}
 }

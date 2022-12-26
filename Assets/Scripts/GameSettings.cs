@@ -27,6 +27,7 @@ public class GameSettings : MonoBehaviour
 	public PlayerClass playerClass;
 	public GameObject primaryWeapon;
 	public GameObject secondaryWeapon;
+	public GameObject grenades;
 
 	void Awake()
 	{
@@ -41,7 +42,7 @@ public class GameSettings : MonoBehaviour
 
 		if (starterPlayer)
 		{
-			AddPlayer(new PlayerSettings(playerClass, playerName, primaryWeapon, secondaryWeapon));
+			AddPlayer(new PlayerSettings(playerClass, playerName, primaryWeapon, secondaryWeapon, grenades));
 		}
 
 	}

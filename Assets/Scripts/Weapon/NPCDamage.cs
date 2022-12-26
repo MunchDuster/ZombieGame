@@ -27,13 +27,8 @@ public class NPCDamage : Weapon
 		if (dist <= attackDist)
 		{
 			coolDownStartTime = Time.timeSinceLevelLoad;
-			Debug.Log("player " + player);
-			Debug.Log("player.health " + player.health);
-
-			player.health.TakeDamage(Vector3.zero, null, this, transform, damage);
-
-			Debug.Log("(Time.timeSinceLevelLoad - coolDownStartTime) " + (Time.timeSinceLevelLoad - coolDownStartTime));
 			OnHit.Invoke();
+			player.health.TakeDamage(Vector3.zero, null, this, transform, damage);
 		}
 	}
 }

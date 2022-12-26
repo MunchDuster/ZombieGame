@@ -41,7 +41,7 @@ public class Recoiler : MonoBehaviour
 
 	private void Start()
 	{
-		gun.OnFireEvent.AddListener(Fire);
+		gun.OnFireEvent.AddListener(FireRecoil);
 	}
 	void LateUpdate()
 	{
@@ -55,13 +55,13 @@ public class Recoiler : MonoBehaviour
 		if (OnRecoilChanged != null) OnRecoilChanged(recoilPosition - oldRecoilPosition, recoilRotation - oldRotation);
 
 		//Set the position
-		if (RecoilPositionTranform != null) RecoilPositionTranform.localPosition = Vector3.Lerp(RecoilPositionTranform.localPosition, recoilPosition, positionDampTime * Time.fixedDeltaTime);
+		RecoilPositionTranform.localPosition = Vector3.Lerp(RecoilPositionTranform.localPosition, recoilPosition, positionDampTime * Time.fixedDeltaTime);
 
 		//Set the rotation
 		localRotation = Vector3.Slerp(localRotation, recoilRotation, rotationDampTime * Time.fixedDeltaTime);
 		RecoilRotationTranform.localRotation = Quaternion.Euler(localRotation);
 	}
-	private void Fire()
+	private void FireRecoil()
 	{
 		//Add rotation
 		Vector3 targetRecoilRotation = (isAiming) ? aimRecoilRotation : hipRecoilRotation;
@@ -69,9 +69,6 @@ public class Recoiler : MonoBehaviour
 		float yRot = Random.Range(-targetRecoilRotation.y, targetRecoilRotation.y);
 		float zRot = Random.Range(-targetRecoilRotation.z, targetRecoilRotation.z);
 		recoilRotation += new Vector3(xRot, yRot, zRot);
-
-		//Add rotation to gun
-
 
 		//Add kickback
 		Vector3 targetRecoilPosition = (isAiming) ? aimRecoilKickback : hipRecoilKickback;

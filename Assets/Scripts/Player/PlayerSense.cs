@@ -12,9 +12,10 @@ public class PlayerSense : MonoBehaviour
 	public delegate void OnEvent(Interactable item);
 	public OnEvent OnHoverItem;
 
-	public HoverInfo hoverInfo;
 	private bool isOn = true;
-	public TextMeshProUGUI text;
+	public TextMeshProUGUI infoText;
+	public TextMeshProUGUI nameText;
+	public GameObject textParent;
 
 	Player player;
 	void Start()
@@ -45,9 +46,15 @@ public class PlayerSense : MonoBehaviour
 	private void UpdateHoverInfo()
 	{
 		if (curHover != null)
-			text.text = curHover.Interact(player, Input.GetKey(KeyCode.E)).info;
+		{
+			textParent.SetActive(true);
+			InteractionInfo hoverInfo = curHover.Interact(player, Input.GetKey(KeyCode.E));
+
+			nameText.text = hoverInfo.interactableName;
+			infoText.text = hoverInfo.info;
+		}
 		else
-			text.text = "";
+			textParent.SetActive(false);
 	}
 
 	Interactable curHover;

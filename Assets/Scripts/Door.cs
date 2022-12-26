@@ -50,13 +50,13 @@ public class Door : Interactable
 			}
 			else
 			{
-				return InteractionInfo.Fail("Costs " + cost + " to unlock.");
+				return InteractionInfo.Fail("Costs " + cost + " to unlock.", hoverName);
 			}
 
 			return InteractionInfo.Success();
 		}
 
-		return InteractionInfo.Fail("Already unlocked");
+		return InteractionInfo.Fail("Already unlocked", hoverName);
 	}
 
 	//Main opening/closing door function

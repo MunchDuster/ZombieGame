@@ -8,14 +8,12 @@ public class GrenadeBase : Weapon
 	public void AnimatorReady()
 	{
 		thrown = false;
-		ammo.text = (amount > 0 ? (thrown ? 0 : 1) : 0).ToString();
-		clip.text = amount.ToString();
+		ammoText.text = amount.ToString();
 	}
 
 	public void ResetTrigger()
 	{
 		animator.ResetTrigger("Fire");
-
 	}
 
 
@@ -25,10 +23,11 @@ public class GrenadeBase : Weapon
 	public Transform thrownGrenadePrefab;
 	public float speed;
 
-	void Awake()
+	void Start()
 	{
-		ammo.text = (amount > 0 ? (thrown ? 0 : 1) : 0).ToString();
-		clip.text = amount.ToString();
+		ammoText.text = amount.ToString();
+		transform.position = normalItemPos.position;
+		transform.rotation = normalItemPos.rotation;
 	}
 
 	void Update()
@@ -50,8 +49,8 @@ public class GrenadeBase : Weapon
 		thrown = true;
 		Transform thrownGrenade = Instantiate(thrownGrenadePrefab, thrownGrenadeSpawnPoint.position, thrownGrenadeSpawnPoint.rotation);
 		thrownGrenade.GetComponent<Rigidbody>().AddForce(thrownGrenade.forward * speed, ForceMode.VelocityChange);
+		thrownGrenade.GetComponent<GrenadeThrown>().grenadeBase = this;
 		amount--;
-		ammo.text = (amount > 0 ? (thrown ? 0 : 1) : 0).ToString();
-		clip.text = amount.ToString();
+		ammoText.text = amount.ToString();
 	}
 }

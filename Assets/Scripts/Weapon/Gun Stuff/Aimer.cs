@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class Aimer : MonoBehaviour
 {
 	//Aiming
-	public Transform playerCamera;
 	public Transform targetNormalPosition;
 	public Transform targetAimingPosition;
 
@@ -30,6 +29,7 @@ public class Aimer : MonoBehaviour
 		{
 			OnAim.Invoke(isAiming);
 			wasAiming = isAiming;
+			Crosshair.instance.HideCrossHair(isAiming);
 		}
 
 		Vector3 offset = isAiming ? gun.GetAimOffset() : Vector3.zero;
@@ -45,6 +45,7 @@ public class Aimer : MonoBehaviour
 		{
 			OnAim.Invoke(false);
 			wasAiming = false;
+			Crosshair.instance.HideCrossHair(false);
 		}
 	}
 }

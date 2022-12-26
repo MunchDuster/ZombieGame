@@ -23,7 +23,6 @@ public class CameraShake : MonoBehaviour
 	public void AddShake(Vector3 point, float amount)
 	{
 		curShake += amount * shakeOverDistance.Evaluate(Vector3.Distance(transform.position, point) / maxDist) * shakeMultiplier;
-		Debug.Log("cur shake" + curShake);
 		shakeTime = 0;
 	}
 

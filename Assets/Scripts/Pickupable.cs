@@ -10,7 +10,7 @@ public class Pickupable : Interactable
 	{
 		if (!active)
 		{
-			return InteractionInfo.Fail("Press E to pick up.");
+			return InteractionInfo.Fail("Press E to pick up.", hoverName);
 		}
 		this.player = player;
 		if (OnPickup != null) OnPickup.Invoke();

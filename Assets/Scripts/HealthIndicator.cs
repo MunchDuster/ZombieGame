@@ -10,20 +10,15 @@ public class HealthIndicator : MonoBehaviour
 	public Health health;
 
 	// Start is called before the first frame update
-	void Awake()
+	void Start()
 	{
 		health.OnChange += UpdateVignette;
 		health.OnDeath.AddListener(ResetVignette);
-		Debug.Break();
 		rawImage.color = Color.clear;
 	}
 
 	void UpdateVignette()
 	{
-		// Debug.Log("rawImage " + rawImage);
-		Debug.Log("rawImage.color " + rawImage.color);
-		// Debug.Log("health " + health);
-		// Debug.Log("health.GetHealthPercent() " + health.GetHealthPercent());
 		rawImage.color = new Color(1f, 1f, 1f, 1f - health.GetHealthPercent());
 	}
 	void ResetVignette()

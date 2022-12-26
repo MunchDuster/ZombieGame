@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
 	public string loadMap;
-	public string loadScene;
+	public string loadingScene;
 
 	public static Menu instance;
 
 	void Awake()
 	{
 		instance = this;
-		SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
+		if (LoadingMenu.instance == null) SceneManager.LoadScene(loadingScene, LoadSceneMode.Additive);
 	}
 
 	public void Quit()
@@ -22,6 +22,6 @@ public class Menu : MonoBehaviour
 	public void LoadScene(bool includeAdditive = false)
 	{
 		Time.timeScale = 1;
-		LoadingMenu.instance.LoadScenes(loadMap);
+		LoadingMenu.instance.LoadScene(loadMap);
 	}
 }

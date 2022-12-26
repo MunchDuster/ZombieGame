@@ -1,12 +1,32 @@
 using UnityEngine;
 using TMPro;
 
+[RequireComponent(typeof(Animator))]
 public abstract class Weapon : MonoBehaviour
 {
 	public string weaponName;
-	public abstract void Fire();
-
 	public bool canUse;
+	public float damage = 20;
+	public Texture icon;
+
+	protected Animator animator;
+
+
+	[HideInInspector]
+	public TextMeshProUGUI ammoText;
+	[HideInInspector]
+	public Transform player;
+	[HideInInspector]
+	public PlayerMoney playerMoney;
+	[HideInInspector]
+	public Transform normalItemPos;
+
+	protected virtual void Awake()
+	{
+		animator = GetComponent<Animator>();
+	}
+
+	public abstract void Fire();
 
 	public void MakeUsable()
 	{
@@ -18,20 +38,8 @@ public abstract class Weapon : MonoBehaviour
 		canUse = false;
 	}
 
-	public float damage = 20;
-
-
-	public Animator animator;
-
-
-	public TextMeshProUGUI ammo;
-	public TextMeshProUGUI clip;
-
 	public void SetActive(bool active)
 	{
 		gameObject.SetActive(active);
 	}
-
-
-	public PlayerMoney playerMoney;
 }

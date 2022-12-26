@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 
 public class Gun : Weapon
 {
@@ -32,12 +30,6 @@ public class Gun : Weapon
 	public float reloadTime = 1.2f;
 	public int startclips = 3;
 
-	[Header("Outer Refs")]
-	public TextMeshProUGUI clipAmmoText;
-	public TextMeshProUGUI reserveAmmoText;
-	public Transform character;
-
-
 	public delegate void OnBlankEvent();
 
 	[Space(10)]
@@ -51,7 +43,7 @@ public class Gun : Weapon
 	private int reserveAmmo
 	{
 		get { return _clips; }
-		set { _clips = value; UpdateClipText(); }
+		set { _clips = value; UpdateAmmoText(); }
 	}
 
 	private int _ammoInClip;
@@ -66,18 +58,17 @@ public class Gun : Weapon
 		ammoInClip = clipSize;
 		reserveAmmo = startclips;
 	}
-	private void UpdateClipText()
+
+	protected override void Awake()
 	{
-		if (reserveAmmoText != null)
-		{
-			reserveAmmoText.text = "" + reserveAmmo;
-		}
+		base.Awake();
+		UpdateAmmoText();
 	}
 	private void UpdateAmmoText()
 	{
-		if (clipAmmoText != null)
+		if (ammoText != null)
 		{
-			clipAmmoText.text = "" + ammoInClip;
+			ammoText.text = ammoInClip + "/" + reserveAmmo;
 		}
 	}
 
@@ -97,16 +88,17 @@ public class Gun : Weapon
 		ammoInClip--;
 
 		//Fire the bullet
-		if (hit.point != null)
+		if (hit.transform != null)
 		{
 			Health health = Health.FindHealth(hit.transform);
 			if (health != null)
 			{
-				HitInfo hitInfo = health.TakeDamage(hit.point, hit.collider, this, character, damage);
+				HitInfo hitInfo = health.TakeDamage(hit.point, hit.collider, this, player, damage);
 
 				if (hitInfo != null)
 				{
 					OnHit.Invoke();
+					Crosshair.instance.ShowHitMarker();
 					if (hitInfo.killedEnemy)
 						playerMoney.AddMoney(health.value);
 
@@ -127,6 +119,7 @@ public class Gun : Weapon
 				hitFX[hitFXIndex].Play();
 			}
 		}
+		animator.SetTrigger("Fire");
 		StartCoroutine(Recoil());
 	}
 
@@ -182,10 +175,6 @@ public class Gun : Weapon
 		{
 			Reload();
 		}
-		else if (isAuto && firePressed)
-		{
-			Fire();
-		}
 	}
 	private void Reload()
 	{
@@ -200,20 +189,14 @@ public class Gun : Weapon
 	public void ReloadFinish()
 	{
 		if (OnReloadFinishEvent != null) OnReloadFinishEvent.Invoke();
-
 		animator.ResetTrigger("Reload");
+
 
 		ammoInClip = Mathf.Min(clipSize, reserveAmmo);
 
 		reserveAmmo = Mathf.Max(0, reserveAmmo - clipSize);
 
 		isReloading = false;
-
-		bool firePressed = Input.GetKey(KeyCode.Mouse0);
-		if (isAuto && firePressed)
-		{
-			Fire();
-		}
 	}
 
 	//Check if can be fired
