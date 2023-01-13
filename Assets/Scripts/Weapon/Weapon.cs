@@ -4,6 +4,7 @@ using TMPro;
 [RequireComponent(typeof(Animator))]
 public abstract class Weapon : MonoBehaviour
 {
+	public enum WeaponType { Primary, Secondary, Tactical, Melee }
 	public string weaponName;
 	public bool canUse;
 	public float damage = 20;

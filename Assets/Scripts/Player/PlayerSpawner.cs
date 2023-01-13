@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
 	public static PlayerSpawner instance;
+
+	public static List<Player> players;
 	public Transform spawnPointParent;
 
 	public GameObject playerPrefab;
@@ -12,6 +14,7 @@ public class PlayerSpawner : MonoBehaviour
 	void Start()
 	{
 		instance = this;
+		players = new List<Player>();
 
 		//Spawn players
 		for (var i = 0; i < GameSettings.instance.playersSettings.Length; i++)
@@ -27,6 +30,15 @@ public class PlayerSpawner : MonoBehaviour
 			player.weaponManager.PickupWeapon(grenades);
 			player.weaponManager.PickupWeapon(secondaryWeapon);
 			player.weaponManager.PickupWeapon(primaryWeapon);
+			players.Add(player);
+		}
+	}
+
+	public void PlayerWon()
+	{
+		for (int i = 0; i < players.Count; i++)
+		{
+			players[i].ShowWinScreen();
 		}
 	}
 }

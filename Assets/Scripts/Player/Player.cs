@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
 	public static List<Player> players;
 
+	public UnityEvent OnWin;
+
 	public Health health;
 	public WeaponManager weaponManager;
 	public PlayerClassController classController;
@@ -22,5 +24,10 @@ public class Player : MonoBehaviour
 	void OnDisable()
 	{
 		players.Remove(this);
+	}
+
+	public void ShowWinScreen()
+	{
+		OnWin.Invoke();
 	}
 }
