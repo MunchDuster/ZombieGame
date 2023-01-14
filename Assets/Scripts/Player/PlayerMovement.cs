@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 	private bool jumpPressed = false;
 	private bool crouchPressed = false;
 	private Vector3 moveInput = Vector3.zero;
-	private Vector3 lookInput = Vector3.zero;
+	public Vector3 lookInput = Vector3.zero;
 
 	//Origins
 	private Vector3 originalScale;
@@ -237,17 +237,10 @@ public class PlayerMovement : MonoBehaviour
 	private void ToggleCrouch(bool isCrouched)
 	{
 		this.isCrouched = isCrouched;
-		if (isCrouched)
-		{
-			transform.localScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
-			walkSpeed *= speedReduction;
-		}
-		else
-		{
-			transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
-			walkSpeed /= speedReduction;
-		}
 
+		walkSpeed = (isCrouched) ? walkSpeed * speedReduction : walkSpeed / speedReduction;
+		float height = (isCrouched) ? crouchHeight : originalScale.y;
+		transform.localScale = new Vector3(originalScale.x, height, originalScale.z);
 	}
 	private void Jump()
 	{

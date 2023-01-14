@@ -7,8 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: f1745f87b8689914d92c29735f27cbe7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Dark
     second: {fileID: 2100000, guid: d3c37772a86e44b4bb64565da34f5ead, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Window
+    second: {fileID: 2100000, guid: 5a9a56c0dd28e3e4f81f63abadc5a959, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FIrst floor
+    second: {fileID: 2100000, guid: 07fbfe1ab3ed95940923441e129bce29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor
+    second: {fileID: 2100000, guid: ace92518b4c8500459f345d6d2585261, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -23,7 +43,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Main
-    second: {fileID: 2100000, guid: 02abdd6e8f2afdb44b3ba4c9a8c0e622, type: 2}
+    second: {fileID: 2100000, guid: 0208b9a055ed89f4baf6f01181aa7675, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar
+    second: {fileID: 2100000, guid: 07fbfe1ab3ed95940923441e129bce29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof
+    second: {fileID: 2100000, guid: 8aa9bead78154fc429e29015ad9f4df4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
