@@ -10,32 +10,25 @@ public class Swayer : MonoBehaviour
 	public float swaySpeed;
 	public float swayClamp;
 	public float runSway;
+	public float verticalForce;
 
 	float verticalSway;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		playerMovement.OnGrounded += () => { verticalSway = -verticalForce; };
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (playerMovement.IsGrounded())
-		{
 
-		}
+		verticalSway = Mathf.Lerp(verticalSway, 0, Time.deltaTime * 5);
 
 		float swayHorizontal = playerMovement.lookInput.x;
-		float swayVertical = GetVerticalSway();
-		Vector3 targetPos = new Vector3(swayHorizontal, swayVertical, 0);
+
+		Vector3 targetPos = new Vector3(swayHorizontal, verticalSway, 0);
 		swayPoint.localPosition = Vector3.Lerp(swayPoint.localPosition, targetPos, Time.deltaTime * swaySpeed);
 	}
-
-	float GetVerticalSway()
-	{
-		if (playerMovement.was)
-	}
-
 }

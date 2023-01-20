@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
 	public KeyCode jumpKey = KeyCode.Space;
 	public KeyCode crouchKey = KeyCode.LeftControl;
 
+	public delegate void OnEvent();
+	public OnEvent OnGrounded;
+
 	//Input states
 	private bool sprintPressed = false;
 	private bool jumpPressed = false;
@@ -248,6 +251,8 @@ public class PlayerMovement : MonoBehaviour
 
 		// Uncrouch for a jump
 		if (isCrouched) ToggleCrouch(false);
+
+		if (OnGrounded != null) OnGrounded();
 	}
 
 	void FixedUpdate()

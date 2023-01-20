@@ -58,6 +58,10 @@ public class WeaponManager : MonoBehaviour
 		Gun gun = weapon as Gun;
 		if (gun != null)
 		{
+			if (gun.playerMoney == null) Debug.LogError("Gun money not assigned!");
+			if (gun.recoiler == null) Debug.LogError("Gun recoiler not assigned!");
+			if (gun.aimer == null) Debug.LogError("Gun aimer not assigned!");
+
 			gun.playerMoney = playerMoney;
 			gun.recoiler.RecoilRotationTranform = recoilRotation;
 			gun.aimer.targetNormalPosition = hipFirePoint;

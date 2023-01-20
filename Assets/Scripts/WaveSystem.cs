@@ -27,7 +27,7 @@ public class WaveSystem : MonoBehaviour
 	public bool startSpawningAtStart;
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		instance = this;
 		spawner.OnAllZombiesDead.AddListener(() => { StartCoroutine(OnWaveCompleted()); });
