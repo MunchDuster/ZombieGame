@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 99c9720ab356a0642a771bea13969a05
+  m_OcclusionCullingData: {fileID: 36300000, guid: 25a6c172a4c49c7409d756e19612e912,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -97,9 +98,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 3c188d234d1a7fd469bebf1e09c83a82,
-    type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: ab4cae20b491bb94cac9699a16a2a403,
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 68b7c861238b5c740a91ea88c9143f8f,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -2021,7 +2021,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -2086,7 +2086,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -2386,7 +2386,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -2438,8 +2438,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 1
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 20.580324, y: 4.675396, z: 19.1994}
-  m_BoxOffset: {x: 5.219136, y: 0.12749577, z: -4.224286}
+  m_BoxSize: {x: 20.580324, y: 4.675396, z: 15.479336}
+  m_BoxOffset: {x: 5.219136, y: 0.12749577, z: -2.364254}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -2451,7 +2451,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -3011,6 +3011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starterPlayer: 1
+  startsWithWeapons: 1
   playerName: Jeff
   playerClass: 0
   primaryWeapon: {fileID: 8131742507241731784, guid: 4d3eb4996fc27be4ea542776d28b4e6a,
@@ -3019,6 +3020,7 @@ MonoBehaviour:
     type: 3}
   grenades: {fileID: 1609304636639848038, guid: 6a4476e74f636d74caeb83b1374b6bcc,
     type: 3}
+  melee: {fileID: 0}
 --- !u!4 &726421372
 Transform:
   m_ObjectHideFlags: 0
@@ -3242,7 +3244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781834606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.28, y: 4.03, z: -18.8}
+  m_LocalPosition: {x: -1.28, y: 4.16, z: -13.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3264,8 +3266,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 1
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 20.236732, y: 11.192547, z: 19.818628}
-  m_BoxOffset: {x: 0.8979168, y: 0.5962734, z: 3.1461515}
+  m_BoxSize: {x: 20.236732, y: 10.46, z: 26.82}
+  m_BoxOffset: {x: 0.8979168, y: 2.6, z: 1.8}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -3277,7 +3279,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -3294,7 +3296,7 @@ GameObject:
   - component: {fileID: 785459945}
   - component: {fileID: 785459947}
   m_Layer: 0
-  m_Name: ZombieSawner
+  m_Name: ZombieSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4778,8 +4780,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 1
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 20.163223, y: 8.469464, z: 27.322031}
-  m_BoxOffset: {x: -7.6408806, y: -1.7006311, z: 11.108026}
+  m_BoxSize: {x: 20.163223, y: 10.02, z: 27.322031}
+  m_BoxOffset: {x: -7.6408806, y: -0.84, z: 11.108026}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -4791,7 +4793,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -5259,7 +5261,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -9311,7 +9313,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -10428,7 +10430,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1
@@ -10954,8 +10956,8 @@ ReflectionProbe:
   m_TimeSlicingMode: 1
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 20.280865, y: 4.5937424, z: 17.165974}
-  m_BoxOffset: {x: 0.41083145, y: 0.19417953, z: 3.221321}
+  m_BoxSize: {x: 20.280865, y: 5.76, z: 17.165974}
+  m_BoxOffset: {x: 0.41083145, y: 1.41, z: 3.221321}
   m_NearClip: 0.3
   m_FarClip: 1000
   m_ShadowDistance: 100
@@ -10967,7 +10969,7 @@ ReflectionProbe:
   m_IntensityMultiplier: 1
   m_BlendDistance: 1
   m_HDR: 1
-  m_BoxProjection: 0
+  m_BoxProjection: 1
   m_RenderDynamicObjects: 1
   m_UseOcclusionCulling: 1
   m_Importance: 1

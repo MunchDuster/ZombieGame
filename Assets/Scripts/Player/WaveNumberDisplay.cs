@@ -9,6 +9,11 @@ public class WaveNumberDisplay : MonoBehaviour
 
 	void Start()
 	{
+		WaveSystem.OnInstanceCreated += AddWaveSystemListener;
+	}
+
+	void AddWaveSystemListener()
+	{
 		WaveSystem.instance.OnWaveIncreased.AddListener(UpdateText);
 	}
 

@@ -7,6 +7,8 @@ using TMPro;
 public class WaveSystem : MonoBehaviour
 {
 	public static WaveSystem instance;
+	public delegate void OnEvent();
+	public static OnEvent OnInstanceCreated;
 	public float startZombieHealth = 40;
 	public float zombieHealthIncrease = 20;
 	public float startZombieSpeed = 1;
@@ -32,6 +34,7 @@ public class WaveSystem : MonoBehaviour
 		instance = this;
 		spawner.OnAllZombiesDead.AddListener(() => { StartCoroutine(OnWaveCompleted()); });
 		if (startSpawningAtStart) StartNextWave();
+		if (OnInstanceCreated != null) OnInstanceCreated();
 	}
 
 	IEnumerator OnWaveCompleted()

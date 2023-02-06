@@ -23,11 +23,13 @@ public class GameSettings : MonoBehaviour
 
 	[Header("Testing")]
 	public bool starterPlayer = false;
+	public bool startsWithWeapons = false;
 	public string playerName = "Jeff";
 	public PlayerClass playerClass;
 	public GameObject primaryWeapon;
 	public GameObject secondaryWeapon;
 	public GameObject grenades;
+	public GameObject melee;
 
 	void Awake()
 	{
@@ -42,7 +44,7 @@ public class GameSettings : MonoBehaviour
 
 		if (starterPlayer)
 		{
-			AddPlayer(new PlayerSettings(playerClass, playerName, primaryWeapon, secondaryWeapon, grenades));
+			AddPlayer(new PlayerSettings(playerClass, playerName, primaryWeapon, secondaryWeapon, grenades, melee));
 		}
 
 	}

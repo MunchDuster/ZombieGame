@@ -6,6 +6,7 @@ using TMPro;
 
 public class WeaponManager : MonoBehaviour
 {
+	public enum WeaponType { Primary, Secondary, Melee, Grenade }
 	public TextMeshProUGUI weaponNameText;
 	public TextMeshProUGUI ammoText;
 	public RawImage weaponIconImage;

@@ -20,16 +20,23 @@ public class PlayerSpawner : MonoBehaviour
 		for (var i = 0; i < GameSettings.instance.playersSettings.Length; i++)
 		{
 			PlayerClass playerClass = GameSettings.instance.playersSettings[i].playerClass;
-			GameObject primaryWeapon = GameSettings.instance.playersSettings[i].primaryWeapon;
-			GameObject secondaryWeapon = GameSettings.instance.playersSettings[i].secondaryWeapon;
-			GameObject grenades = GameSettings.instance.playersSettings[i].grenades;
+
 			Transform spawnPoint = spawnPointParent.GetChild(Random.Range(0, spawnPointParent.childCount));
 			GameObject playerObject = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation, transform);
 			Player player = playerObject.GetComponentInChildren<Player>();
 			player.classController.PickClass(playerClass);
-			player.weaponManager.PickupWeapon(grenades);
-			player.weaponManager.PickupWeapon(secondaryWeapon);
-			player.weaponManager.PickupWeapon(primaryWeapon);
+
+			if (GameSettings.instance.startsWithWeapons)
+			{
+				GameObject primaryWeapon = GameSettings.instance.playersSettings[i].primaryWeapon;
+				if (primaryWeapon != null) player.weaponManager.PickupWeapon(primaryWeapon);
+				GameObject secondaryWeapon = GameSettings.instance.playersSettings[i].secondaryWeapon;
+				if (secondaryWeapon != null) player.weaponManager.PickupWeapon(secondaryWeapon);
+				GameObject grenades = GameSettings.instance.playersSettings[i].grenades;
+				if (grenades != null) player.weaponManager.PickupWeapon(grenades);
+				GameObject melee = GameSettings.instance.playersSettings[i].melee;
+				if (melee != null) player.weaponManager.PickupWeapon(melee);
+			}
 			players.Add(player);
 		}
 	}

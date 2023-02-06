@@ -57,24 +57,21 @@ public class LoadingMenu : MonoBehaviour
 	}
 	IEnumerator LoadScenesProgress(string newScene)
 	{
-		AsyncOperation asyncOperation2 = SceneManager.UnloadSceneAsync(currentScene);
-		while (asyncOperation2.progress < 1f)
+		AsyncOperation unloadCurrentSceneOperation = SceneManager.UnloadSceneAsync(currentScene);
+		AsyncOperation loadNewSceneOperation = SceneManager.LoadSceneAsync(newScene, LoadSceneMode.Additive);
+
+		float totalProgress = 0;
+		while (totalProgress < 1f)
 		{
-			float loadValue = asyncOperation2.progress;
-			slider.value = loadValue;
-			percentText.text = "Unloading current scene: " + (loadValue * 100).ToString("000.0") + "%";
+			totalProgress = (unloadCurrentSceneOperation.progress + loadNewSceneOperation.progress) / 2f;
+			slider.value = totalProgress;
+			percentText.text = "Unloading current scene: " + (totalProgress * 100).ToString("000.0") + "%";
 			yield return null;
 		}
 
-		AsyncOperation asyncOperation1 = SceneManager.LoadSceneAsync(newScene, LoadSceneMode.Additive);
-
-		while (asyncOperation1.progress < 1f)
-		{
-			float loadValue = asyncOperation1.progress;
-			slider.value = loadValue;
-			percentText.text = "Loading next scene: " + (loadValue * 100).ToString("000.0") + "%";
-			yield return null;
-		}
+		yield return null;
+		Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(newScene);
+		UnityEngine.SceneManagement.SceneManager.SetActiveScene(scene);
 
 		currentScene = newScene;
 		StopLoading();

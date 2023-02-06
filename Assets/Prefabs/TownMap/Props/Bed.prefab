@@ -100,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8565d33e3be7ea144bf0f8328e655d6d,
         type: 3}
       propertyPath: m_Name
-      value: Bed (1)
+      value: Bed
       objectReference: {fileID: 0}
     - target: {fileID: 8151023354082563727, guid: 8565d33e3be7ea144bf0f8328e655d6d,
         type: 3}
@@ -115,7 +115,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8371991817889187841}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8704417133798000512
+--- !u!65 &7359143081243666591
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,5 +126,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.126924, y: 1.1165725, z: 0.7091466}
-  m_Center: {x: -0.9774156, y: -0.50000006, z: 0.35073638}
+  m_Size: {x: 2.552309, y: 1.3398871, z: 0.850976}
+  m_Center: {x: -1.1728988, y: -0.6000002, z: 0.42088366}

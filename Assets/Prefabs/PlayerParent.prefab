@@ -6220,8 +6220,9 @@ MonoBehaviour:
   sprintKey: 304
   jumpKey: 32
   crouchKey: 306
+  lookInput: {x: 0, y: 0, z: 0}
   fov: 90
-  mouseSensitivity: 1
+  mouseSensitivity: 0.1
   maxLookAngle: 90
   walkSpeed: 7
   crouchedSpeed: 5
@@ -6618,9 +6619,9 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 26.2, y: 8.63}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 0.99999934
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -6629,7 +6630,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 200
-  field of view: 90
+  field of view: 153.90413
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
