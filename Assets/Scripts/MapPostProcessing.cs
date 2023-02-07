@@ -35,6 +35,6 @@ public class MapPostProcessing : MonoBehaviour
 	}
 	public void SetBlur(bool blur)
 	{
-		depthOfField.active = blur;
+		depthOfField.mode.value = blur ? DepthOfFieldMode.Gaussian : DepthOfFieldMode.Bokeh;
 	}
 }

@@ -22,14 +22,14 @@ public class GameSettings : MonoBehaviour
 	}
 
 	[Header("Testing")]
-	public bool starterPlayer = false;
+	[SerializeField] bool starterPlayer = false;
 	public bool startsWithWeapons = false;
-	public string playerName = "Jeff";
-	public PlayerClass playerClass;
-	public GameObject primaryWeapon;
-	public GameObject secondaryWeapon;
-	public GameObject grenades;
-	public GameObject melee;
+	[SerializeField] string playerName = "Jeff";
+	[SerializeField] PlayerClass playerClass;
+	[SerializeField] GameObject primaryWeapon;
+	[SerializeField] GameObject secondaryWeapon;
+	[SerializeField] GameObject grenades;
+	[SerializeField] GameObject melee;
 
 	void Awake()
 	{

@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: a17a54b43700b054887da036f5f4ce29,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: ab4cae20b491bb94cac9699a16a2a403,
     type: 2}
 --- !u!196 &4
@@ -3130,6 +3131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starterPlayer: 1
+  startsWithWeapons: 1
   playerName: Jeff
   playerClass: 0
   primaryWeapon: {fileID: 8131742507241731784, guid: 4d3eb4996fc27be4ea542776d28b4e6a,
@@ -3138,6 +3140,7 @@ MonoBehaviour:
     type: 3}
   grenades: {fileID: 1609304636639848038, guid: 6a4476e74f636d74caeb83b1374b6bcc,
     type: 3}
+  melee: {fileID: 0}
 --- !u!4 &981205142
 Transform:
   m_ObjectHideFlags: 0
@@ -5209,8 +5212,8 @@ MonoBehaviour:
     name: Airport
     sceneName: AirportMap
   - texture: {fileID: 2800000, guid: 9f2a761a23b263d4eafd465320bc0644, type: 3}
-    name: Town
-    sceneName: TownMap
+    name: VillageMap
+    sceneName: VillageMap
 --- !u!114 &1763675018
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class PlayerMoney : MonoBehaviour
 	public TextMeshProUGUI text;
 
 	public float money = 200;
+	public float displayUpdateSpeed = 50;
 
 	void Start()
 	{
@@ -17,6 +18,16 @@ public class PlayerMoney : MonoBehaviour
 	public void AddMoney(float amount)
 	{
 		money += amount;
-		text.text = money.ToString();
+	}
+	float displayMoney = 0;
+
+	void Update()
+	{
+		if (displayMoney != money)
+		{
+			float difference = money - displayMoney;
+			displayMoney += Mathf.Sign(difference) * Mathf.Min(Mathf.Abs(difference), displayUpdateSpeed);
+			text.text = "$" + displayMoney.ToString("F0");
+		}
 	}
 }

@@ -25,6 +25,7 @@ public class PlayerSpawner : MonoBehaviour
 			GameObject playerObject = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation, transform);
 			Player player = playerObject.GetComponentInChildren<Player>();
 			player.classController.PickClass(playerClass);
+			GameSettings.instance.playersSettings[i].inGamePlayer = player;
 
 			if (GameSettings.instance.startsWithWeapons)
 			{

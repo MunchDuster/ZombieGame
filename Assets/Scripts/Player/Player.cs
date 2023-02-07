@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
 	public UnityEvent OnWin;
 
+	public Camera camera;
 	public Health health;
 	public WeaponManager weaponManager;
 	public PlayerClassController classController;
