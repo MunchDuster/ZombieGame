@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 public class AutoFocs : MonoBehaviour
 {
 	DepthOfField depthOfField;
-	public Transform camera;
+	public Transform playerCamera;
 	public LayerMask layerMask;
 
 	public float defaultRaycastLength = 100;
@@ -23,7 +23,7 @@ public class AutoFocs : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (!Physics.Raycast(camera.position, camera.forward, out RaycastHit hit, 100, layerMask)) return;
+		if (!Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, 100, layerMask)) return;
 
 		depthOfField.focusDistance.value = hit.distance;
 	}

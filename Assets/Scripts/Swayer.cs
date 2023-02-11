@@ -5,8 +5,9 @@ using UnityEngine;
 public class Swayer : MonoBehaviour
 {
 	public Transform swayPoint;
-	public PlayerMovement playerMovement;
 	public float swaySize;
+	public PlayerMovement playerMovement;
+	public MovementJump movementJump;
 	public float swaySpeed;
 	public float swayClamp;
 	public float runSway;
@@ -17,13 +18,12 @@ public class Swayer : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		playerMovement.OnGrounded += () => { verticalSway = -verticalForce; };
+		movementJump.OnGrounded += () => { verticalSway = -verticalForce; };
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-
 		verticalSway = Mathf.Lerp(verticalSway, 0, Time.deltaTime * 5);
 
 		float swayHorizontal = playerMovement.lookInput.x;

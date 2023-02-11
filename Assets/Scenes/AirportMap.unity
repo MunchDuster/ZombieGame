@@ -21,12 +21,12 @@ RenderSettings:
   m_FogDensity: 0.03
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
+  m_SubtractiveShadowColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: d3e27643c3bbaa94f95d9010962f21ef, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -6613,6 +6613,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 3329511705307855830, guid: 5764099045073584faad8e107c3594d5,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3482929457119460090, guid: 5764099045073584faad8e107c3594d5,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -6907,6 +6912,12 @@ PrefabInstance:
     - {fileID: 7157608247452244434, guid: 5764099045073584faad8e107c3594d5, type: 3}
     - {fileID: 3493610875353606473, guid: 5764099045073584faad8e107c3594d5, type: 3}
     - {fileID: 1360422741786403374, guid: 5764099045073584faad8e107c3594d5, type: 3}
+    - {fileID: 3287677383477197370, guid: 5764099045073584faad8e107c3594d5, type: 3}
+    - {fileID: -6076275948823379222, guid: 5764099045073584faad8e107c3594d5, type: 3}
+    - {fileID: -905500532340941481, guid: 5764099045073584faad8e107c3594d5, type: 3}
+    - {fileID: 6637181204241908112, guid: 5764099045073584faad8e107c3594d5, type: 3}
+    - {fileID: -6662170824283015002, guid: 5764099045073584faad8e107c3594d5, type: 3}
+    - {fileID: 8274025790792410887, guid: 5764099045073584faad8e107c3594d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5764099045073584faad8e107c3594d5, type: 3}
 --- !u!4 &1112155382 stripped
 Transform:
@@ -7722,7 +7733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288716057}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.63, y: 5.62, z: -5.23}
+  m_LocalPosition: {x: 83.65, y: 5.62, z: -5.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7851,7 +7862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297280679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.63, y: 5.62, z: 6.66}
+  m_LocalPosition: {x: 83.93, y: 5.62, z: 3.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7932,44 +7943,7 @@ MonoBehaviour:
   unlocked: 0
   OnOpen:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 785459945}
-        m_TargetAssemblyTypeName: ZombieSpawner, Assembly-CSharp
-        m_MethodName: AddSpawnPointParent
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 743139125}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1964452982}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_clip
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 630490c742f5319409135bb9cac2b3d1,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1964452982}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnUnlock:
     m_PersistentCalls:
       m_Calls: []
@@ -9041,7 +9015,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544544529}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.63, y: 5.62, z: -1.67}
+  m_LocalPosition: {x: 83.75, y: 5.62, z: -2.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10013,7 +9987,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710177948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43.63, y: 5.62, z: 3.44}
+  m_LocalPosition: {x: 83.52, y: 5.62, z: 7.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
